@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zewu.price.comparison.mbg.mapper.TradingSheetDetailMapper">
+  <resultMap id="BaseResultMap" type="com.zewu.price.comparison.mbg.model.TradingSheetDetail">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="trading_sheet_id" jdbcType="VARCHAR" property="tradingSheetId" />
+    <result column="brick_or_goods_id" jdbcType="VARCHAR" property="brickOrGoodsId" />
+    <result column="shipment" jdbcType="VARCHAR" property="shipment" />
+    <result column="unit_price" jdbcType="VARCHAR" property="unitPrice" />
+    <result column="total_price" jdbcType="VARCHAR" property="totalPrice" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, trading_sheet_id, brick_or_goods_id, shipment, unit_price, total_price
+  </sql>
+  <select id="selectByExample" parameterType="com.zewu.price.comparison.mbg.model.TradingSheetDetailExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from trading_sheet_detail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from trading_sheet_detail
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from trading_sheet_detail
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zewu.price.comparison.mbg.model.TradingSheetDetailExample">
+    delete from trading_sheet_detail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zewu.price.comparison.mbg.model.TradingSheetDetail">
+    insert into trading_sheet_detail (id, trading_sheet_id, brick_or_goods_id, 
+      shipment, unit_price, total_price
+      )
+    values (#{id,jdbcType=VARCHAR}, #{tradingSheetId,jdbcType=VARCHAR}, #{brickOrGoodsId,jdbcType=VARCHAR}, 
+      #{shipment,jdbcType=VARCHAR}, #{unitPrice,jdbcType=VARCHAR}, #{totalPrice,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zewu.price.comparison.mbg.model.TradingSheetDetail">
+    insert into trading_sheet_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="tradingSheetId != null">
+        trading_sheet_id,
+      </if>
+      <if test="brickOrGoodsId != null">
+        brick_or_goods_id,
+      </if>
+      <if test="shipment != null">
+        shipment,
+      </if>
+      <if test="unitPrice != null">
+        unit_price,
+      </if>
+      <if test="totalPrice != null">
+        total_price,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="tradingSheetId != null">
+        #{tradingSheetId,jdbcType=VARCHAR},
+      </if>
+      <if test="brickOrGoodsId != null">
+        #{brickOrGoodsId,jdbcType=VARCHAR},
+      </if>
+      <if test="shipment != null">
+        #{shipment,jdbcType=VARCHAR},
+      </if>
+      <if test="unitPrice != null">
+        #{unitPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="totalPrice != null">
+        #{totalPrice,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zewu.price.comparison.mbg.model.TradingSheetDetailExample" resultType="java.lang.Integer">
+    select count(*) from trading_sheet_detail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update trading_sheet_detail
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tradingSheetId != null">
+        trading_sheet_id = #{record.tradingSheetId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brickOrGoodsId != null">
+        brick_or_goods_id = #{record.brickOrGoodsId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shipment != null">
+        shipment = #{record.shipment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitPrice != null">
+        unit_price = #{record.unitPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalPrice != null">
+        total_price = #{record.totalPrice,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update trading_sheet_detail
+    set id = #{record.id,jdbcType=VARCHAR},
+      trading_sheet_id = #{record.tradingSheetId,jdbcType=VARCHAR},
+      brick_or_goods_id = #{record.brickOrGoodsId,jdbcType=VARCHAR},
+      shipment = #{record.shipment,jdbcType=VARCHAR},
+      unit_price = #{record.unitPrice,jdbcType=VARCHAR},
+      total_price = #{record.totalPrice,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zewu.price.comparison.mbg.model.TradingSheetDetail">
+    update trading_sheet_detail
+    <set>
+      <if test="tradingSheetId != null">
+        trading_sheet_id = #{tradingSheetId,jdbcType=VARCHAR},
+      </if>
+      <if test="brickOrGoodsId != null">
+        brick_or_goods_id = #{brickOrGoodsId,jdbcType=VARCHAR},
+      </if>
+      <if test="shipment != null">
+        shipment = #{shipment,jdbcType=VARCHAR},
+      </if>
+      <if test="unitPrice != null">
+        unit_price = #{unitPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="totalPrice != null">
+        total_price = #{totalPrice,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zewu.price.comparison.mbg.model.TradingSheetDetail">
+    update trading_sheet_detail
+    set trading_sheet_id = #{tradingSheetId,jdbcType=VARCHAR},
+      brick_or_goods_id = #{brickOrGoodsId,jdbcType=VARCHAR},
+      shipment = #{shipment,jdbcType=VARCHAR},
+      unit_price = #{unitPrice,jdbcType=VARCHAR},
+      total_price = #{totalPrice,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
